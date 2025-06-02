@@ -11,6 +11,7 @@ import com.example.composenewsapp.manager.usecases.ReadAppEntry
 import com.example.composenewsapp.manager.usecases.SaveAppEntry
 import com.example.composenewsapp.manager.usecases.news.GetNews
 import com.example.composenewsapp.manager.usecases.news.NewsUseCases
+import com.example.composenewsapp.manager.usecases.news.SearchNews
 import com.example.e_pharmacycompose.utils.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -66,7 +67,8 @@ object Module {
         newRepository: NewRepository
     ):NewsUseCases{
         return NewsUseCases(
-            news = GetNews(newRepository)
+            news = GetNews(newRepository),
+            searchNews = SearchNews(newRepository)
         )
     }
 

@@ -10,8 +10,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.composenewsapp.onboarding.OnboardingViewModel
+import com.example.composenewsapp.presentation.Search.SearchScreen
+import com.example.composenewsapp.presentation.Search.SearchViewModel
+import com.example.composenewsapp.presentation.home.HomeScreen
+import com.example.composenewsapp.presentation.home.HomeViewModel
 import com.example.e_pharmacycompose.presentation.onboarding.OnBoardingScreen
+import dagger.hilt.android.lifecycle.HiltViewModel
 
 @Composable
 fun NavGraph(startDestination: String) {
@@ -41,8 +47,18 @@ fun NavGraph(startDestination: String) {
             startDestination = Route.NewsNavigatorScreen.route
         ){
             composable(
-                route = Route.NewsNavigatorScreen.route){
-                Text(text = "NewNavigator")
+                route = Route.NewsNavigatorScreen.route)
+            {
+//                val viewModel:HomeViewModel = hiltViewModel()
+//                val articles = viewModel.news.collectAsLazyPagingItems()
+//                HomeScreen(article = articles, navigate = {})
+
+                val viewModel:SearchViewModel = hiltViewModel()
+                SearchScreen(state = viewModel.state.value, event = viewModel::onEvent, navigate = {})
+
+
+
+               // Text(text = "NewNavigator")
             }
         }
 
