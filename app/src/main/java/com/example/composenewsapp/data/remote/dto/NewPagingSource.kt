@@ -2,11 +2,11 @@ package com.example.composenewsapp.data.remote.dto
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.composenewsapp.domain.model.Article
+import com.example.composenewsapp.data.local.Article
 
 class NewPagingSource(private  val newsApi: NewsApi,
                       private  val source:String
-    ):PagingSource<Int,Article>() {
+    ):PagingSource<Int, Article>() {
 
     private var totalNewCount:Int = 0
 

@@ -1,7 +1,7 @@
 package com.example.composenewsapp.presentation.Search
 
 import androidx.paging.PagingData
-import com.example.composenewsapp.domain.model.Article
+import com.example.composenewsapp.data.local.Article
 import kotlinx.coroutines.flow.Flow
 
 data class SearchState(

@@ -22,9 +22,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.paging.compose.LazyPagingItems
-import coil.decode.ImageSource
 import com.example.composenewsapp.R
-import com.example.composenewsapp.domain.model.Article
+import com.example.composenewsapp.data.local.Article
 import com.example.composenewsapp.presentation.common.ArticleList
 import com.example.composenewsapp.presentation.common.SearchBar
 import com.example.composenewsapp.presentation.navgraph.Route

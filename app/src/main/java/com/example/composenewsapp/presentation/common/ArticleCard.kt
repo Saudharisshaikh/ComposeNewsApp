@@ -25,7 +25,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.composenewsapp.R
-import com.example.composenewsapp.domain.model.Article
+import com.example.composenewsapp.data.local.Article
 import com.example.e_pharmacycompose.presentation.onboarding.Dimens.ArticleCardSize
 import com.example.e_pharmacycompose.presentation.onboarding.Dimens.ExtraSmallPadding
 import com.example.e_pharmacycompose.presentation.onboarding.Dimens.ExtraSmallPadding2

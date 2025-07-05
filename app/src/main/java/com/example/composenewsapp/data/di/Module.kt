@@ -1,6 +1,10 @@
 package com.example.composenewsapp.data.di
 
 import android.app.Application
+import androidx.room.Room
+import com.example.composenewsapp.data.local.NewsDao
+import com.example.composenewsapp.data.local.NewsDatabase
+import com.example.composenewsapp.data.local.NewsTypeConvertor
 import com.example.composenewsapp.data.manager.LocalStorageManagerImp
 import com.example.composenewsapp.data.remote.dto.NewsApi
 import com.example.composenewsapp.data.repository.NewsRepositoryImp
@@ -72,5 +76,29 @@ object Module {
         )
     }
 
-}
 
+
+
+    @Provides
+    @Singleton
+    fun provideNewsDatabase(
+        application: Application
+    ): NewsDatabase {
+        return Room.databaseBuilder(
+            context = application,
+            klass = NewsDatabase::class.java,
+            name = "news_db"
+        ).fallbackToDestructiveMigration()
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideNewsDao(
+        newsDatabase: NewsDatabase
+    ): NewsDao = newsDatabase.newsDao
+
+
+
+
+}

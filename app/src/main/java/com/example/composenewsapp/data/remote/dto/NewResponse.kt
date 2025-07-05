@@ -1,6 +1,6 @@
 package com.example.composenewsapp.data.remote.dto
 
-import com.example.composenewsapp.domain.model.Article
+import com.example.composenewsapp.data.local.Article
 
 data class NewResponse(
     val articles: List<Article>,

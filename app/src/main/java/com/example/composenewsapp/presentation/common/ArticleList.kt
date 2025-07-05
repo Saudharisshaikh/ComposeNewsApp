@@ -7,12 +7,11 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import com.example.composenewsapp.domain.model.Article
+import com.example.composenewsapp.data.local.Article
 import com.example.e_pharmacycompose.presentation.onboarding.Dimens.ExtraSmallPadding2
 import com.example.e_pharmacycompose.presentation.onboarding.Dimens.MeddiumPadding1
 

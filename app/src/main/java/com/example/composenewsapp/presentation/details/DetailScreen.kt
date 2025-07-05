@@ -20,15 +20,14 @@ import androidx.compose.ui.res.colorResource
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.composenewsapp.R
-import com.example.composenewsapp.domain.model.Article
+import com.example.composenewsapp.data.local.Article
 import com.example.composenewsapp.presentation.details.components.DetailsTopBar
-import com.example.composenewsapp.presentation.navgraph.Route
 import com.example.e_pharmacycompose.presentation.onboarding.Dimens.ArticleImageHeight
 import com.example.e_pharmacycompose.presentation.onboarding.Dimens.MeddiumPadding1
 
 @Composable
 fun DetailScreen(
-    article:Article,
+    article: Article,
     event:(DetailEvent)-> Unit,
     navigateUp:()-> Unit
 

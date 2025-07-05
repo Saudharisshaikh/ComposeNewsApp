@@ -1,10 +1,8 @@
 package com.example.composenewsapp.data.remote.dto
 
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.composenewsapp.domain.model.Article
+import com.example.composenewsapp.data.local.Article
 
 
 class SearchPagingSource(private  val newsApi: NewsApi,
