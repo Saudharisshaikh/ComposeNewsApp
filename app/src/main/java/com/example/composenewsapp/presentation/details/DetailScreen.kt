@@ -1,5 +1,6 @@
 package com.example.composenewsapp.presentation.details
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.layout.Column
@@ -26,6 +27,7 @@ import com.example.composenewsapp.presentation.navgraph.Route
 import com.example.e_pharmacycompose.presentation.onboarding.Dimens.ArticleImageHeight
 import com.example.e_pharmacycompose.presentation.onboarding.Dimens.MeddiumPadding1
 
+@SuppressLint("SuspiciousIndentation")
 @Composable
 fun DetailScreen(
     article:Article,

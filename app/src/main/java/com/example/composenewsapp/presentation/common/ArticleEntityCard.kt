@@ -26,19 +26,19 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.composenewsapp.R
 import com.example.composenewsapp.data.local.ArticlesEntity
-import com.example.composenewsapp.domain.model.Article
 import com.example.e_pharmacycompose.presentation.onboarding.Dimens.ArticleCardSize
 import com.example.e_pharmacycompose.presentation.onboarding.Dimens.ExtraSmallPadding
 import com.example.e_pharmacycompose.presentation.onboarding.Dimens.ExtraSmallPadding2
 import com.example.e_pharmacycompose.presentation.onboarding.Dimens.SmallSizeIcon
 
 @Composable
-fun ArticleCard(article: Article,
-                onClick:()->Unit
-                ) {
+fun ArticleEntityCard(
+    articlesEntity: ArticlesEntity,
+    onClick: Unit
+) {
 
     val  context = LocalContext.current
-    Row(modifier = Modifier.clickable { onClick() }) {
+    Row(modifier = Modifier.clickable { onClick }) {
 
         AsyncImage(
             modifier = Modifier.size(
@@ -46,7 +46,7 @@ fun ArticleCard(article: Article,
             ).clip(MaterialTheme.shapes.medium),
             contentScale = ContentScale.Crop
             ,
-            model = ImageRequest.Builder(context).data(article.urlToImage).build(),
+            model = ImageRequest.Builder(context).data(articlesEntity.urlToImage).build(),
             contentDescription = null
 
 
@@ -58,7 +58,7 @@ fun ArticleCard(article: Article,
                 .height(ArticleCardSize)
         ) {
             Text(
-               text = article.title,
+                text = articlesEntity.title,
                 style = MaterialTheme.typography.bodyMedium,
                 color = colorResource(
                     R.color.text_title
@@ -68,42 +68,40 @@ fun ArticleCard(article: Article,
             )
 
 
-          Row (
-              verticalAlignment = Alignment.CenterVertically,
-              )
-          {
-              Text(
-                  text = article.source.name,
-                  style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
-                  color = colorResource(
-                      R.color.body
-                  ),
+            Row (
+                verticalAlignment = Alignment.CenterVertically,
+            )
+            {
+                Text(
+                    text = articlesEntity.name,
+                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
+                    color = colorResource(
+                        R.color.body
+                    ),
 
-                  )
+                    )
 
-              Spacer(modifier = Modifier.width(ExtraSmallPadding2))
+                Spacer(modifier = Modifier.width(ExtraSmallPadding2))
 
-              Icon(
-                  painterResource(R.drawable.ic_time),
-                  contentDescription = null,
-                  modifier = Modifier.size(SmallSizeIcon),
-                  tint = colorResource(R.color.body)
+                Icon(
+                    painterResource(R.drawable.ic_time),
+                    contentDescription = null,
+                    modifier = Modifier.size(SmallSizeIcon),
+                    tint = colorResource(R.color.body)
 
-              )
-              Spacer(modifier = Modifier.width(ExtraSmallPadding2))
+                )
+                Spacer(modifier = Modifier.width(ExtraSmallPadding2))
 
-              Text(
-                  text = article.publishedAt,
-                  style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
-                  color = colorResource(
-                      R.color.body
-                  ),
+                Text(
+                    text = articlesEntity.publishedAt,
+                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
+                    color = colorResource(
+                        R.color.body
+                    ),
 
-                  )
-          }
+                    )
+            }
         }
         //
     }
 }
-
-

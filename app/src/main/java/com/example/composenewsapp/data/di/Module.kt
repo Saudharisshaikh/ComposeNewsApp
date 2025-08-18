@@ -1,17 +1,25 @@
 package com.example.composenewsapp.data.di
 
 import android.app.Application
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import com.example.composenewsapp.data.local.ArticlesDao
+import com.example.composenewsapp.data.local.NewArticleDatabase
 import com.example.composenewsapp.data.manager.LocalStorageManagerImp
 import com.example.composenewsapp.data.remote.dto.NewsApi
 import com.example.composenewsapp.data.repository.NewsRepositoryImp
 import com.example.composenewsapp.domain.repository.NewRepository
 import com.example.composenewsapp.manager.LocalStorageManager
 import com.example.composenewsapp.manager.usecases.AppEntryUserCases
+import com.example.composenewsapp.manager.usecases.DeleteArticle
 import com.example.composenewsapp.manager.usecases.ReadAppEntry
 import com.example.composenewsapp.manager.usecases.SaveAppEntry
+import com.example.composenewsapp.manager.usecases.SelectedArticle
+import com.example.composenewsapp.manager.usecases.UpsertArticle
 import com.example.composenewsapp.manager.usecases.news.GetNews
 import com.example.composenewsapp.manager.usecases.news.NewsUseCases
 import com.example.composenewsapp.manager.usecases.news.SearchNews
+import com.example.e_pharmacycompose.utils.Constants
 import com.example.e_pharmacycompose.utils.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -64,13 +72,35 @@ object Module {
     @Provides
     @Singleton
     fun providesNewsUseCases(
-        newRepository: NewRepository
+        newRepository: NewRepository,
+        articlesDao: ArticlesDao
+
     ):NewsUseCases{
         return NewsUseCases(
             news = GetNews(newRepository),
-            searchNews = SearchNews(newRepository)
+            searchNews = SearchNews(newRepository),
+            upsertArticle = UpsertArticle(articlesDao),
+            deleteArticle = DeleteArticle(articlesDao),
+            selectedArticle = SelectedArticle(articlesDao)
         )
     }
 
+@Provides
+@Singleton
+fun providesArticleDatabase(application: Application):NewArticleDatabase{
+    return Room.databaseBuilder(context = application,
+        klass = NewArticleDatabase::class.java,
+        name = Constants.DATABASE_NAME) .fallbackToDestructiveMigration()
+        .build()
 }
+
+  @Provides
+  @Singleton
+  fun providesArticleDao(newArticleDatabase: NewArticleDatabase):
+          ArticlesDao = newArticleDatabase.articlesDao
+
+
+}
+
+
 
