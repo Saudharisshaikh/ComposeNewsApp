@@ -26,19 +26,20 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.composenewsapp.R
 import com.example.composenewsapp.data.local.ArticlesEntity
+import com.example.composenewsapp.domain.model.Article
 import com.example.e_pharmacycompose.presentation.onboarding.Dimens.ArticleCardSize
 import com.example.e_pharmacycompose.presentation.onboarding.Dimens.ExtraSmallPadding
 import com.example.e_pharmacycompose.presentation.onboarding.Dimens.ExtraSmallPadding2
 import com.example.e_pharmacycompose.presentation.onboarding.Dimens.SmallSizeIcon
 
 @Composable
-fun ArticleEntityCard(
-    articlesEntity: ArticlesEntity,
-    onClick:()-> Unit
+fun NewArticleEntityCard(
+    articlesEntity: Article,
+    onClick: Unit
 ) {
 
     val  context = LocalContext.current
-    Row(modifier = Modifier.clickable { onClick() }) {
+    Row(modifier = Modifier.clickable { onClick }) {
 
         AsyncImage(
             modifier = Modifier.size(
@@ -73,7 +74,7 @@ fun ArticleEntityCard(
             )
             {
                 Text(
-                    text = articlesEntity.name,
+                    text = articlesEntity.source.name,
                     style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
                     color = colorResource(
                         R.color.body

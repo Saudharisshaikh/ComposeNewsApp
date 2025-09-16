@@ -36,12 +36,12 @@ fun EmptyScreen(error: LoadState.Error? = null) {
         mutableStateOf(parseErrorMessage(error = error))
     }
 
-   var icon by remember {
-       mutableStateOf(R.drawable.ic_network_error)
-   }
+    var icon by remember {
+        mutableStateOf(R.drawable.ic_network_error)
+    }
 
-    if(error == null){
-        message = "You have not save news so far!"
+    if (error == null){
+        message = "You have not saved news so far !"
         icon = R.drawable.ic_search_document
     }
 
@@ -50,17 +50,23 @@ fun EmptyScreen(error: LoadState.Error? = null) {
     }
 
     val alphaAnimation by animateFloatAsState(
-        targetValue = if(startAnimation) 0.3f else 0f,
-        animationSpec = tween(durationMillis = 1000)
+        targetValue = if (startAnimation) 0.3f else 0f,
+        animationSpec = tween(durationMillis = 1000),
+        label = ""
     )
 
     LaunchedEffect(key1 = true) {
-        startAnimation
+        startAnimation = true
     }
 
     EmptyContent(alphaAnim = alphaAnimation, message = message, iconId = icon)
 
 }
+
+
+
+
+
 
 @Composable
 fun EmptyContent(alphaAnim:Float, message:String, iconId:Int) {

@@ -22,17 +22,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.paging.compose.LazyPagingItems
-import coil.decode.ImageSource
 import com.example.composenewsapp.R
 import com.example.composenewsapp.domain.model.Article
 import com.example.composenewsapp.presentation.common.ArticleList
 import com.example.composenewsapp.presentation.common.SearchBar
-import com.example.composenewsapp.presentation.navgraph.Route
 import com.example.e_pharmacycompose.presentation.onboarding.Dimens.MeddiumPadding1
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HomeScreen(article: LazyPagingItems<Article>, navigate:(String) ->Unit) {
+fun HomeScreen(articles: LazyPagingItems<Article>, navigateToSearchScreen:() ->Unit, navigateToDetailScreen: (Article) -> Unit) {
 
     // remember { ... }
     //This tells Compose to cache the value so it's not recomputed on every recomposition.
@@ -72,8 +70,8 @@ fun HomeScreen(article: LazyPagingItems<Article>, navigate:(String) ->Unit) {
 
     val title by remember {
         derivedStateOf {
-            if(article.itemCount > 10){
-                article.itemSnapshotList.items
+            if(articles.itemCount > 10){
+                articles.itemSnapshotList.items
                     .slice(IntRange(start = 0, endInclusive = 9))
                     .joinToString(separator = "\uD83d\uDFE5")
             }
@@ -142,7 +140,7 @@ fun HomeScreen(article: LazyPagingItems<Article>, navigate:(String) ->Unit) {
             onValueChange = {},
             onSearch = {},
             onClick = {
-                navigate(Route.SearchScreen.route)
+                navigateToSearchScreen()
             }
         )
 
@@ -159,8 +157,9 @@ fun HomeScreen(article: LazyPagingItems<Article>, navigate:(String) ->Unit) {
 
         Spacer(modifier = Modifier.height(MeddiumPadding1))
 
-        ArticleList(modifier = Modifier.padding(MeddiumPadding1), articles = article, onClick = {
-            navigate(Route.DetailScreen.route)
+        ArticleList(modifier = Modifier.padding(MeddiumPadding1), articles = articles, onClick = {
+            navigateToDetailScreen(it)
         })
     }
 }
+

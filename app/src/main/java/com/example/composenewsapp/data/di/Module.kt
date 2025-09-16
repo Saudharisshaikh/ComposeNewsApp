@@ -14,6 +14,7 @@ import com.example.composenewsapp.manager.usecases.AppEntryUserCases
 import com.example.composenewsapp.manager.usecases.DeleteArticle
 import com.example.composenewsapp.manager.usecases.ReadAppEntry
 import com.example.composenewsapp.manager.usecases.SaveAppEntry
+import com.example.composenewsapp.manager.usecases.SelectArticle
 import com.example.composenewsapp.manager.usecases.SelectedArticle
 import com.example.composenewsapp.manager.usecases.UpsertArticle
 import com.example.composenewsapp.manager.usecases.news.GetNews
@@ -63,9 +64,11 @@ object Module {
     @Provides
     @Singleton
     fun providesNewsRepository(
-      api: NewsApi
+      api: NewsApi,
+      articlesDao: ArticlesDao
     ):NewRepository = NewsRepositoryImp(
-       newsApi = api
+       newsApi = api,
+       newsDao = articlesDao
     )
 
 
@@ -79,9 +82,10 @@ object Module {
         return NewsUseCases(
             news = GetNews(newRepository),
             searchNews = SearchNews(newRepository),
-            upsertArticle = UpsertArticle(articlesDao),
-            deleteArticle = DeleteArticle(articlesDao),
-            selectedArticle = SelectedArticle(articlesDao)
+            upsertArticle = UpsertArticle(newRepository),
+            deleteArticle = DeleteArticle(newRepository),
+            selectedArticle = SelectedArticle(newRepository),
+            selectArticle = SelectArticle(newRepository)
         )
     }
 

@@ -1,5 +1,6 @@
 package com.example.composenewsapp.presentation.bookmark
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,13 +14,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import com.example.composenewsapp.R
+import com.example.composenewsapp.data.local.ArticlesEntity
+import com.example.composenewsapp.domain.model.Article
 import com.example.composenewsapp.presentation.common.ArticleList
 import com.example.composenewsapp.presentation.navgraph.Route
 import com.example.e_pharmacycompose.presentation.onboarding.Dimens.MeddiumPadding1
+import com.example.e_pharmacycompose.utils.Constants
 
 @Composable
 fun BookmarkScreen(bookmarkState: BookmarkState,
-                   navigate:(String) -> Unit ) {
+                   navigateToDetailScreen:(Article) -> Unit ) {
+
 
     Column(modifier = Modifier
         .fillMaxSize()
@@ -34,7 +39,14 @@ fun BookmarkScreen(bookmarkState: BookmarkState,
 
         )
         Spacer(modifier =  Modifier.height(MeddiumPadding1))
-        ArticleList(articles = bookmarkState.articleList, onClick = {navigate(Route.DetailScreen.route)})
+        ArticleList(articles = bookmarkState.articleList, onClick = {
+            val articleEntity = it
+            Log.d("--ds:", "BookmarkScreen: ${articleEntity}")
+            val article = Constants.convertToArticle(article = articleEntity)
+            navigateToDetailScreen(article)
+            //navigateToDetailScreen(it)
+
+        })
     }
 
 

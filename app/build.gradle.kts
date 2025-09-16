@@ -74,6 +74,14 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+
+    // rx java
+    implementation ("io.reactivex.rxjava3:rxandroid:3.0.2")
+    // Because RxAndroid releases are few and far between, it is recommended you also
+    // explicitly depend on RxJava's latest version for bug fixes and new features.
+    // (see https://github.com/ReactiveX/RxJava/releases for latest 3.x.x version)
+    implementation ("io.reactivex.rxjava3:rxjava:3.1.5")
+
     //Splash Api
     implementation ("androidx.core:core-splashscreen:1.0.1")
 
@@ -107,6 +115,9 @@ dependencies {
     //def paging_version = "3.1.1"
     implementation ("androidx.paging:paging-runtime:3.1.1")
     implementation ("androidx.paging:paging-compose:3.2.0-rc01")
+
+    // Room RxJava3 support
+    implementation ("androidx.room:room-rxjava3:2.6.1")
 
     //Room
     //def room_version = "2.5.2"

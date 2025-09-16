@@ -1,6 +1,7 @@
 package com.example.composenewsapp.presentation.common
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -51,7 +52,9 @@ fun ArticleList(
 )
 {
 
-
+        if (articles.isEmpty()){
+            EmptyScreen()
+        }
 
         LazyColumn(
             modifier = modifier.fillMaxSize(),
@@ -60,7 +63,7 @@ fun ArticleList(
         ) {
             items(count = articles.size){
              val articlesEntity =  articles[it]
-                ArticleEntityCard(articlesEntity = articlesEntity, onClick = onClick(articlesEntity))
+                ArticleEntityCard(articlesEntity = articlesEntity, onClick = {onClick(articlesEntity)})
             }
     }
 
@@ -85,6 +88,12 @@ fun handlePagingResult(
             false
         }
         error != null ->{
+            Log.d("--notNull", "handlePagingResult: ")
+            EmptyScreen( error = error)
+            false
+        }
+        articles.itemCount == 0 ->{
+            Log.d("--Null", "handlePagingResult: ")
             EmptyScreen()
             false
         }
@@ -93,6 +102,8 @@ fun handlePagingResult(
         }
     }
 }
+
+
 
 @Composable
 fun ShimmerEffect() {

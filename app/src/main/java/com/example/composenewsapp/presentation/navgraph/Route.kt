@@ -10,4 +10,6 @@ sealed class Route (val route:String) {
     object AppStartNavigation:Route(route = "appStartNavigation")
     object NewsNavigation:Route(route = "newsNavigation")
     object NewsNavigatorScreen:Route(route = "newsNavigator")
+    object TempScreen:Route(route = "tempScreen")
+
 }
